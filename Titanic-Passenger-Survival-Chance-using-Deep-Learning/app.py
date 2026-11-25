@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from tensorflow.keras.models import load_model
 import pickle
+import os
 
 st.title("Passenger Survival Chance in the Titanic Journey")
 
@@ -23,16 +24,19 @@ user_data = pd.DataFrame([{
 
 if st.button('Data'):
     st.write(user_data)
-    
-model = load_model('model.h5')
 
-with open('label_encoder.pkl', 'rb') as file:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, "models")
+
+model = load_model(MODEL_DIR, 'model.h5')
+
+with open(MODEL_DIR, 'label_encoder.pkl', 'rb') as file:
     label = pickle.load(file)
     
-with open('onehot_encoder.pkl', 'rb') as file:
+with open(MODEL_DIR, 'onehot_encoder.pkl', 'rb') as file:
     onehot = pickle.load(file)
     
-with open('scaler.pkl', 'rb') as file:
+with open(MODEL_DIR, 'scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
     
 user_data['Sex'] = label.transform(user_data['Sex'])
