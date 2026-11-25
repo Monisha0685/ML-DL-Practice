@@ -24,15 +24,15 @@ user_data = pd.DataFrame([{
 if st.button('Data'):
     st.write(user_data)
     
-model = load_model('models/model.h5')
+model = load_model('model.h5')
 
-with open('models/label_encoder.pkl', 'rb') as file:
+with open('label_encoder.pkl', 'rb') as file:
     label = pickle.load(file)
     
-with open('models/onehot_encoder.pkl', 'rb') as file:
+with open('onehot_encoder.pkl', 'rb') as file:
     onehot = pickle.load(file)
     
-with open('models/scaler.pkl', 'rb') as file:
+with open('scaler.pkl', 'rb') as file:
     scaler = pickle.load(file)
     
 user_data['Sex'] = label.transform(user_data['Sex'])
