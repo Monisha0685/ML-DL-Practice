@@ -28,15 +28,15 @@ if st.button('Data'):
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 
-model = load_model(MODEL_DIR, 'model.h5')
+model = load_model(os.path.join(MODEL_DIR, 'model.h5'))
 
-with open(MODEL_DIR, 'label_encoder.pkl', 'rb') as file:
+with open(os.path.join(MODEL_DIR, 'label_encoder.pkl'), 'rb') as file:
     label = pickle.load(file)
     
-with open(MODEL_DIR, 'onehot_encoder.pkl', 'rb') as file:
+with open(os.path.join(MODEL_DIR, 'onehot_encoder.pkl'), 'rb') as file:
     onehot = pickle.load(file)
     
-with open(MODEL_DIR, 'scaler.pkl', 'rb') as file:
+with open(os.path.join(MODEL_DIR, 'scaler.pkl'), 'rb') as file:
     scaler = pickle.load(file)
     
 user_data['Sex'] = label.transform(user_data['Sex'])
